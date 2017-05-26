@@ -70,12 +70,6 @@ const generateInterface = (interfaceObj) => {
 const generateProperty = (prop, className) => {
   const typeArgsString = getType(prop.type);
   mdObject[className] += `**${prop.name}${prop.flags.isOptional ? '?' : ''}**: \`${typeArgsString}\`  \n`;
-  const comment = prop.comment;
-  if (comment) {
-    if (comment.shortText) {
-      mdObject[className] += `${comment.shortText}  \n`;
-    }
-  }
 };
 
 const generateCallSignature = (sig, className) => {

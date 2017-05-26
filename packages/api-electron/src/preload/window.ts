@@ -13,7 +13,7 @@ class Window implements ssf.Window {
   innerWindow: any;
   id: number;
 
-  constructor(options: ssf.WindowOptions, callback, errorCallback) {
+  constructor(options, callback, errorCallback) {
     MessageService.subscribe('*', 'ssf-window-message', (...args) => {
       const event = 'message';
       this.innerWindow.emit(event, ...args);
