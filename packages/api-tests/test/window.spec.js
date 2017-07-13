@@ -24,7 +24,11 @@ const setupWindowSteps = (windowOptions) => [
   () => app.client.isVisible('.visible-check'),
   () => openNewWindow(app.client, windowOptions),
   () => selectWindow(app.client, 1),
-  () => app.client.waitForVisible('.visible-check'),
+  () => app.client.waitForVisible('.visible-check')
+
+];
+
+const setWindowDefaults = () => [
   () => callAsyncWindowMethod('restore'),
   () => callAsyncWindowMethod('setBounds', initialBounds)
 ];
@@ -783,6 +787,7 @@ if (process.env.MOCHA_CONTAINER !== 'browser') {
 
         const steps = [
           ...setupWindowSteps(windowOptions),
+          ...setWindowDefaults(),
           () => addListener('move'),
           () => callAsyncWindowMethod('setBounds', bounds),
           () => wait(retrieveDelay),
@@ -803,6 +808,7 @@ if (process.env.MOCHA_CONTAINER !== 'browser') {
 
         const steps = [
           ...setupWindowSteps(windowOptions),
+          ...setWindowDefaults(),
           () => addListener('resize'),
           () => callAsyncWindowMethod('setBounds', bounds),
           () => wait(retrieveDelay),
@@ -883,6 +889,7 @@ if (process.env.MOCHA_CONTAINER !== 'browser') {
 
         const steps = [
           ...setupWindowSteps(windowOptions),
+          ...setWindowDefaults(),
           () => addListener(event),
           () => callAsyncWindowMethod(event),
           () => wait(retrieveDelay),
@@ -903,6 +910,7 @@ if (process.env.MOCHA_CONTAINER !== 'browser') {
 
         const steps = [
           ...setupWindowSteps(windowOptions),
+          ...setWindowDefaults(),
           () => addListener(event),
           () => callAsyncWindowMethod(event),
           () => wait(retrieveDelay),
@@ -923,6 +931,7 @@ if (process.env.MOCHA_CONTAINER !== 'browser') {
 
         const steps = [
           ...setupWindowSteps(windowOptions),
+          ...setWindowDefaults(),
           () => addListener(event),
           () => callAsyncWindowMethod('minimize'),
           () => callAsyncWindowMethod(event),
