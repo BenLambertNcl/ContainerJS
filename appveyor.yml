@@ -1,6 +1,9 @@
 platform:
   - x64
 
+init:
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
 environment:
   nodejs_version: "7.9.0"
   access_token:
@@ -29,3 +32,6 @@ deploy_script:
   - ps: .\deploy-script.ps1
 
 build: off
+
+on_finish:
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
